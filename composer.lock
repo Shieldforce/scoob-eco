@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "c533288c1d78e43968c10b0f148422abccdbaa5b"
+                "reference": "9431e5b2d6a130e71d4f9be3a8c32dfe32a92044"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/c533288c1d78e43968c10b0f148422abccdbaa5b",
-                "reference": "c533288c1d78e43968c10b0f148422abccdbaa5b",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/9431e5b2d6a130e71d4f9be3a8c32dfe32a92044",
+                "reference": "9431e5b2d6a130e71d4f9be3a8c32dfe32a92044",
                 "shasum": ""
             },
             "require": {
@@ -45,7 +45,7 @@
                 "issues": "https://github.com/Shieldforce/scoob/issues",
                 "source": "https://github.com/Shieldforce/scoob/tree/main"
             },
-            "time": "2025-04-20T20:10:47+00:00"
+            "time": "2025-04-20T21:00:32+00:00"
         }
     ],
     "packages-dev": [],

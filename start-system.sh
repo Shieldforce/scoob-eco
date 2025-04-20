@@ -35,6 +35,7 @@ spinner() {
     printf "\r"
 }
 
+#-------------------------------------------------------------------------------------------------------
 
 # Limpando o cache do Composer
 ./src/Core/exec_spinner.sh \
@@ -45,6 +46,8 @@ spinner() {
          composer clear-cache > /dev/null 2>&1" \
     "Limpando cache do composer..."
 
+#-------------------------------------------------------------------------------------------------------
+
 # Composer install
 ./src/Core/exec_spinner.sh \
     "docker run --rm \
@@ -53,6 +56,8 @@ spinner() {
          -w /var/www/html composer/composer \
          composer install --ignore-platform-reqs > /dev/null 2>&1" \
     "Instalando pacotes..."
+
+#-------------------------------------------------------------------------------------------------------
 
 # Composer require shieldforce/scoob
 ./src/Core/exec_spinner.sh \
@@ -63,14 +68,52 @@ spinner() {
          composer require shieldforce/scoob:dev-main --prefer-dist > /dev/null 2>&1" \
     "Inserindo o pacote do Scoob..."
 
-default_port=9000
+#-------------------------------------------------------------------------------------------------------
 
+# Etapa montando container ---
+default_port_nginx=9000
 echo "";
 bash ./vendor/shieldforce/scoob/progs/question.sh "
  Qual a porta que você quer setar para o container do nginx?"
-read -p " Digite a porta do container Nginx Porta padrão (${default_port}): " port
+read -p " Digite a porta do container Nginx (Porta padrão ${default_port_nginx}): " port_nginx
+port_nginx=${port_nginx:-$default_port_nginx}
+bash ./vendor/shieldforce/scoob/scoob --type docker-php-nginx-auto --version 8.4 --port "$port_nginx"
 
-port=${port:-$default_port}
+#-------------------------------------------------------------------------------------------------------
+# Etapa montando mysql ---
+default_port_mysql=3399
+default_user_name=scoob_user
+default_password=scoob_pass
+default_db_name=scoob_db
+default_container_name=scoob-mysql
+echo "-";
+echo "-";
+echo "-";
+bash ./vendor/shieldforce/scoob/progs/question.sh "
+ Você deseja instalar mysql?"
+read -p " S/N: (Por padrão é N): " install_mysql
 
-# Etapa montando container ---
-bash ./vendor/shieldforce/scoob/scoob --type docker-php-nginx-auto --version 8.4 --port "$port"
+if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "s" ]]; then
+
+    read -p " Porta do mysql (Por padrão é ${default_port_mysql}): " port_mysql
+    read -p " Usuário do mysql (Por padrão é ${default_user_name}): " user_name
+    read -p " Senha do mysql (Por padrão é ${default_password}): " password
+    read -p " Nome do bando do mysql (Por padrão é ${default_db_name}): " db_name
+    read -p " Nome do container do mysql (Por padrão é ${default_container_name}): " container_name
+
+    port_mysql=${port_mysql:-$default_port_mysql}
+    user_name=${user_name:-$default_user_name}
+    password=${password:-$default_password}
+    db_name=${db_name:-$default_db_name}
+    container_name=${container_name:-$default_container_name}
+
+    echo "$default_container_name"
+
+    # Etapa montando container ---
+    bash ./vendor/shieldforce/scoob/scoob --mysql-ext=true \
+        --port="${port_mysql}" \
+        --user="${user_name}" \
+        --pass="${password}" \
+        --db="${db_name}" \
+        --container="${container_name}"
+fi
