@@ -96,10 +96,15 @@ read -p " S/N: (Por padrão é N): " install_mysql
 if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "s" ]]; then
 
     read -p " Porta do mysql (Por padrão é ${default_port_mysql}): " port_mysql
+    echo "-"
     read -p " Usuário do mysql (Por padrão é ${default_user_name}): " user_name
+    echo "-"
     read -p " Senha do mysql (Por padrão é ${default_password}): " password
+    echo "-"
     read -p " Nome do bando do mysql (Por padrão é ${default_db_name}): " db_name
+    echo "-"
     read -p " Nome do container do mysql (Por padrão é ${default_container_name}): " container_name
+    echo "-"
 
     port_mysql=${port_mysql:-$default_port_mysql}
     user_name=${user_name:-$default_user_name}
