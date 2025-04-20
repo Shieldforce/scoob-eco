@@ -28,11 +28,14 @@ sanitize_name_dash() {
   # Remove acentos
   input=$(echo "$input" | iconv -f utf8 -t ascii//TRANSLIT)
 
-  # Substitui espaços por traço
-  input=$(echo "$input" | sed 's/ /-/g')
+  # Substitui qualquer caractere não alfanumérico por hífen
+  input=$(echo "$input" | sed 's/[^a-z0-9]/-/g')
 
-  # Remove caracteres especiais (mantém letras, números e hífen)
-  input=$(echo "$input" | sed 's/[^a-z0-9\-]//g')
+  # Remove hífens duplicados
+  input=$(echo "$input" | sed 's/-\{2,\}/-/g')
+
+  # Remove hífen do início e fim, se houver
+  input=$(echo "$input" | sed 's/^-//' | sed 's/-$//')
 
   echo "$input"
 }
@@ -161,7 +164,7 @@ if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "S" ]]; then
     user_name=$(sanitize_name_underscore "${user_name:-$default_user_name}")
     password=$(sanitize_name_underscore "${password:-$default_password}")
     db_name=$(sanitize_name_underscore "${db_name:-$default_db_name}")
-    container_name=$(sanitize_name_underscore "${container_name:-$default_container_name}")
+    container_name=$(sanitize_name_dash "${container_name:-$default_container_name}")
 
     # Etapa montando container ---
     bash ./vendor/shieldforce/scoob/scoob --mysql-ext=true \
