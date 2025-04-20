@@ -150,18 +150,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "68bfa4b3d0187bb1ab7e3bb99c6c26c5fce00bc9"
+                "reference": "215fff097abde33251de5fe92d1a78b279fd9166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/68bfa4b3d0187bb1ab7e3bb99c6c26c5fce00bc9",
-                "reference": "68bfa4b3d0187bb1ab7e3bb99c6c26c5fce00bc9",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/215fff097abde33251de5fe92d1a78b279fd9166",
+                "reference": "215fff097abde33251de5fe92d1a78b279fd9166",
                 "shasum": ""
             },
             "require": {
                 "shieldforce/scoob-eco": "dev-main"
             },
-            "time": "2025-04-20T21:58:02+00:00",
+            "time": "2025-04-20T22:35:18+00:00",
             "default-branch": true,
             "type": "library",
             "installation-source": "dist",

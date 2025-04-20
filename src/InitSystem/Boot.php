@@ -28,6 +28,7 @@ class Boot
 
             echo "✅ Conexão com banco de dados realizada com sucesso!";
         } catch (PDOException $e) {
+            var_dump($e->getMessage());
             echo "❌ Erro ao conectar com o banco: " . $e->getMessage();
             exit;
         }

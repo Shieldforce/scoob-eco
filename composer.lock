@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f2675745b4b9747a44ce23c205a21fb",
+    "content-hash": "162e07ced956a632c82c1559718cd984",
     "packages": [
         {
             "name": "graham-campbell/result-type",
@@ -149,12 +149,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "68bfa4b3d0187bb1ab7e3bb99c6c26c5fce00bc9"
+                "reference": "215fff097abde33251de5fe92d1a78b279fd9166"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/68bfa4b3d0187bb1ab7e3bb99c6c26c5fce00bc9",
-                "reference": "68bfa4b3d0187bb1ab7e3bb99c6c26c5fce00bc9",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/215fff097abde33251de5fe92d1a78b279fd9166",
+                "reference": "215fff097abde33251de5fe92d1a78b279fd9166",
                 "shasum": ""
             },
             "require": {
@@ -182,7 +182,7 @@
                 "issues": "https://github.com/Shieldforce/scoob/issues",
                 "source": "https://github.com/Shieldforce/scoob/tree/main"
             },
-            "time": "2025-04-20T21:58:02+00:00"
+            "time": "2025-04-20T22:35:18+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -516,7 +516,9 @@
     },
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": {},
+    "platform": {
+        "ext-pdo": "*"
+    },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

@@ -19,6 +19,45 @@ echo -e "\e[33;36m  ------------------------------------------------------------
 echo -e "${RED}AGUARDE QUE O SCOOB VAI INSTALAR TUDO QUE VOCÊ PRECISA...!${NC}"
 echo ""
 
+sanitize_name_dash() {
+  local input="$1"
+
+  # Converte para minúsculas
+  input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+
+  # Remove acentos
+  input=$(echo "$input" | iconv -f utf8 -t ascii//TRANSLIT)
+
+  # Substitui espaços por traço
+  input=$(echo "$input" | sed 's/ /-/g')
+
+  # Remove caracteres especiais (mantém letras, números e hífen)
+  input=$(echo "$input" | sed 's/[^a-z0-9\-]//g')
+
+  echo "$input"
+}
+
+sanitize_name_underscore() {
+  local input="$1"
+
+  # Converte para minúsculas
+  input=$(echo "$input" | tr '[:upper:]' '[:lower:]')
+
+  # Remove acentos
+  input=$(echo "$input" | iconv -f utf8 -t ascii//TRANSLIT)
+
+  # Substitui espaços por underline
+  input=$(echo "$input" | sed 's/ /_/g')
+
+  # Substitui hífens por underline
+  input=$(echo "$input" | sed 's/-/_/g')
+
+  # Remove caracteres especiais (mantém letras, números e underline)
+  input=$(echo "$input" | sed 's/[^a-z0-9_]//g')
+
+  echo "$input"
+}
+
 # Função de spinner
 spinner() {
     local pid=$1
@@ -104,26 +143,25 @@ bash ./vendor/shieldforce/scoob/progs/question.sh "
  Você deseja instalar mysql?"
 read -p " S/N: (Por padrão é N): " install_mysql
 
-if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "s" ]]; then
+if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "S" ]]; then
 
     read -p " Porta do mysql (Por padrão é ${default_port_mysql}): " port_mysql
     echo " -"
     read -p " Usuário do mysql (Por padrão é ${default_user_name}): " user_name
     echo " -"
-    read -p " Senha do mysql (Por padrão é ${default_password}): " password
+    read -s -p "Senha do MySQL (Por padrão é ${default_password}): " password
+    echo ""
     echo " -"
-    read -p " Nome do bando do mysql (Por padrão é ${default_db_name}): " db_name
+    read -p " Nome do banco do mysql (Por padrão é ${default_db_name}): " db_name
     echo " -"
     read -p " Nome do container do mysql (Por padrão é ${default_container_name}): " container_name
     echo " -"
 
     port_mysql=${port_mysql:-$default_port_mysql}
-    user_name=${user_name:-$default_user_name}
-    password=${password:-$default_password}
-    db_name=${db_name:-$default_db_name}
-    container_name=${container_name:-$default_container_name}
-
-    echo "$default_container_name"
+    user_name=$(sanitize_name_underscore "${user_name:-$default_user_name}")
+    password=$(sanitize_name_underscore "${password:-$default_password}")
+    db_name=$(sanitize_name_underscore "${db_name:-$default_db_name}")
+    container_name=$(sanitize_name_underscore "${container_name:-$default_container_name}")
 
     # Etapa montando container ---
     bash ./vendor/shieldforce/scoob/scoob --mysql-ext=true \
