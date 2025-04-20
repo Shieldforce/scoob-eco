@@ -21,6 +21,19 @@ else
         exit
       fi
     fi
+  elif [[ "$2" = "docker-php-nginx-auto" ]]; then
+    if [ -v $3 ]; then
+      echo "Você precisa passar a flag --version como terceiro parâmetro!!"
+      exit
+    else
+      if [[ "$4" = "8.2" ]] || [[ "$4" = "8.3" ]] || [[ "$4" = "8.4" ]]; then
+        bash ${path_dir}/progs/runs/php/$4/run-auto.sh "$@"
+      else
+        echo "Você precisa escolher uma versão, as versões "
+        echo "disponíveis são: $(printf '%s, ' "${versions[@]}") "
+        exit
+      fi
+    fi
   elif [[ "$2" = "docker-laravel" ]]; then
     if [ -v $3 ]; then
       echo "Você precisa passar a flag --version como terceiro parâmetro!!"

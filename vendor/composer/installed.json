@@ -2,20 +2,24 @@
     "packages": [
         {
             "name": "shieldforce/scoob",
-            "version": "v3.2.0",
-            "version_normalized": "3.2.0.0",
+            "version": "dev-main",
+            "version_normalized": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "1a2e04387f73f6136e134b54c566c74d14659d9e"
+                "reference": "c533288c1d78e43968c10b0f148422abccdbaa5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/1a2e04387f73f6136e134b54c566c74d14659d9e",
-                "reference": "1a2e04387f73f6136e134b54c566c74d14659d9e",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/c533288c1d78e43968c10b0f148422abccdbaa5b",
+                "reference": "c533288c1d78e43968c10b0f148422abccdbaa5b",
                 "shasum": ""
             },
-            "time": "2025-04-12T18:23:43+00:00",
+            "require": {
+                "shieldforce/scoob-eco": "dev-main"
+            },
+            "time": "2025-04-20T20:10:47+00:00",
+            "default-branch": true,
             "type": "library",
             "installation-source": "dist",
             "autoload": {
@@ -36,7 +40,7 @@
             "description": "Pacote para gerar containers rápidos",
             "support": {
                 "issues": "https://github.com/Shieldforce/scoob/issues",
-                "source": "https://github.com/Shieldforce/scoob/tree/v3.2.0"
+                "source": "https://github.com/Shieldforce/scoob/tree/main"
             },
             "install-path": "../shieldforce/scoob"
         }

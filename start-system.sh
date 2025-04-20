@@ -35,44 +35,42 @@ spinner() {
     printf "\r"
 }
 
+
+# Limpando o cache do Composer
+./src/Core/exec_spinner.sh \
+    "docker run --rm \
+         -u "$(id -u):$(id -g)" \
+         -v "$(pwd):/var/www/html" \
+         -w /var/www/html composer/composer \
+         composer clear-cache > /dev/null 2>&1" \
+    "Limpando cache do composer..."
+
 # Composer install
-# echo -e "${YELLOW}➡️  Instalando as dependências...${NC}"
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v "$(pwd):/var/www/html" \
-    -w /var/www/html composer/composer \
-    composer install --ignore-platform-reqs > /dev/null 2>&1 &
-
-PID=$!
-spinner $PID "Instalando pacotes..." # Usando a função spinner com texto dinâmico
-wait $PID
-RESULT=$?
-
-if [ $RESULT -eq 0 ]; then
-    echo -e "${GREEN}✅ Composer install finalizado com sucesso!${NC}"
-else
-    echo -e "${RED}❌ Erro ao instalar as dependências com o Composer.${NC}"
-    exit 1
-fi
+./src/Core/exec_spinner.sh \
+    "docker run --rm \
+         -u "$(id -u):$(id -g)" \
+         -v "$(pwd):/var/www/html" \
+         -w /var/www/html composer/composer \
+         composer install --ignore-platform-reqs > /dev/null 2>&1" \
+    "Instalando pacotes..."
 
 # Composer require shieldforce/scoob
-# echo -e "${YELLOW}➡️  Instalando o Scoob...${NC}"
-docker run --rm \
-    -u "$(id -u):$(id -g)" \
-    -v "$(pwd):/var/www/html" \
-    -w /var/www/html composer/composer \
-    composer require shieldforce/scoob > /dev/null 2>&1 &
+./src/Core/exec_spinner.sh \
+    "docker run --rm \
+         -u "$(id -u):$(id -g)" \
+         -v "$(pwd):/var/www/html" \
+         -w /var/www/html composer/composer \
+         composer require shieldforce/scoob:dev-main --prefer-dist > /dev/null 2>&1" \
+    "Inserindo o pacote do Scoob..."
 
-PID=$!
-spinner $PID "Inserindo o pacote do Scoob..." # Usando a função spinner com texto dinâmico
-wait $PID
-RESULT=$?
+default_port=9000
 
-if [ $RESULT -eq 0 ]; then
-    echo -e "${GREEN}✅ Pacote do Scoob inserido com sucesso!${NC}"
-else
-    echo -e "${RED}❌ Erro ao inserir pacote do Scoob.${NC}"
-    exit 1
-fi
+echo "";
+bash ./vendor/shieldforce/scoob/progs/question.sh "
+ Qual a porta que você quer setar para o container do nginx?"
+read -p " Digite a porta do container Nginx Porta padrão (${default_port}): " port
 
-bash ./vendor/shieldforce/scoob/scoob --type docker-php-nginx --version 8.4 --port 9000
+port=${port:-$default_port}
+
+# Etapa montando container ---
+bash ./vendor/shieldforce/scoob/scoob --type docker-php-nginx-auto --version 8.4 --port "$port"

@@ -4,22 +4,26 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "abff1160b9a5f27ea34cf8586f083efb",
+    "content-hash": "f3a0b21380ac6a5328cdf51f6e4d1c99",
     "packages": [
         {
             "name": "shieldforce/scoob",
-            "version": "v3.2.0",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "1a2e04387f73f6136e134b54c566c74d14659d9e"
+                "reference": "c533288c1d78e43968c10b0f148422abccdbaa5b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/1a2e04387f73f6136e134b54c566c74d14659d9e",
-                "reference": "1a2e04387f73f6136e134b54c566c74d14659d9e",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/c533288c1d78e43968c10b0f148422abccdbaa5b",
+                "reference": "c533288c1d78e43968c10b0f148422abccdbaa5b",
                 "shasum": ""
             },
+            "require": {
+                "shieldforce/scoob-eco": "dev-main"
+            },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "psr-4": {
@@ -39,15 +43,17 @@
             "description": "Pacote para gerar containers rápidos",
             "support": {
                 "issues": "https://github.com/Shieldforce/scoob/issues",
-                "source": "https://github.com/Shieldforce/scoob/tree/v3.2.0"
+                "source": "https://github.com/Shieldforce/scoob/tree/main"
             },
-            "time": "2025-04-12T18:23:43+00:00"
+            "time": "2025-04-20T20:10:47+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": {
+        "shieldforce/scoob": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {},
