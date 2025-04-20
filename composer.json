@@ -13,6 +13,7 @@
     }
   ],
   "require": {
-    "shieldforce/scoob": "dev-main"
+    "shieldforce/scoob": "dev-main",
+    "vlucas/phpdotenv": "^5.6"
   }
 }

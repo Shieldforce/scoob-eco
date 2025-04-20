@@ -70,6 +70,17 @@ spinner() {
 
 #-------------------------------------------------------------------------------------------------------
 
+# Composer require vlucas/phpdotenv
+./src/Core/exec_spinner.sh \
+    "docker run --rm \
+         -u "$(id -u):$(id -g)" \
+         -v "$(pwd):/var/www/html" \
+         -w /var/www/html composer/composer \
+         composer require vlucas/phpdotenv > /dev/null 2>&1" \
+    "Inserindo o pacote do vlucas/phpdotenv..."
+
+#-------------------------------------------------------------------------------------------------------
+
 # Etapa montando container ---
 default_port_nginx=9000
 echo "";
@@ -96,15 +107,15 @@ read -p " S/N: (Por padrão é N): " install_mysql
 if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "s" ]]; then
 
     read -p " Porta do mysql (Por padrão é ${default_port_mysql}): " port_mysql
-    echo "-"
+    echo " -"
     read -p " Usuário do mysql (Por padrão é ${default_user_name}): " user_name
-    echo "-"
+    echo " -"
     read -p " Senha do mysql (Por padrão é ${default_password}): " password
-    echo "-"
+    echo " -"
     read -p " Nome do bando do mysql (Por padrão é ${default_db_name}): " db_name
-    echo "-"
+    echo " -"
     read -p " Nome do container do mysql (Por padrão é ${default_container_name}): " container_name
-    echo "-"
+    echo " -"
 
     port_mysql=${port_mysql:-$default_port_mysql}
     user_name=${user_name:-$default_user_name}
