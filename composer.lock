@@ -149,12 +149,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "215fff097abde33251de5fe92d1a78b279fd9166"
+                "reference": "9375d438d1dd8b0a2f44d2827da12907baf2bb86"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/215fff097abde33251de5fe92d1a78b279fd9166",
-                "reference": "215fff097abde33251de5fe92d1a78b279fd9166",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/9375d438d1dd8b0a2f44d2827da12907baf2bb86",
+                "reference": "9375d438d1dd8b0a2f44d2827da12907baf2bb86",
                 "shasum": ""
             },
             "require": {
@@ -182,7 +182,7 @@
                 "issues": "https://github.com/Shieldforce/scoob/issues",
                 "source": "https://github.com/Shieldforce/scoob/tree/main"
             },
-            "time": "2025-04-20T22:35:18+00:00"
+            "time": "2025-04-21T00:19:11+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",

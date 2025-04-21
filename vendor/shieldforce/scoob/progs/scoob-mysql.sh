@@ -82,48 +82,48 @@ fi
 cat > "$init_sql_path" <<EOF
 -- User root
 
-CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'root'@'%' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'root'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'%.%.%.%' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'root'@'%.%.%.%' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'%.%.%.%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'root'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'0.0.0.0' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'root'@'0.0.0.0' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'0.0.0.0' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON *.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS 'root'@'localhost' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost' WITH GRANT OPTION;
 
--- User default
+-- User criado
 
-CREATE USER IF NOT EXISTS 'scoob_user'@'%' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'%' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS '$mysql_user'@'%' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'scoob_user'@'%.%.%.%' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'%.%.%.%' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS '$mysql_user'@'%.%.%.%' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'%.%.%.%' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'scoob_user'@'0.0.0.0' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'0.0.0.0' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS '$mysql_user'@'0.0.0.0' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'0.0.0.0' WITH GRANT OPTION;
 
-CREATE USER IF NOT EXISTS 'scoob_user'@'localhost' IDENTIFIED BY '${db_pass}';
-GRANT ALL PRIVILEGES ON scoob_db.* TO 'scoob_user'@'localhost' WITH GRANT OPTION;
+CREATE USER IF NOT EXISTS '$mysql_user'@'localhost' IDENTIFIED BY '$mysql_pass';
+GRANT ALL PRIVILEGES ON *.* TO '$mysql_user'@'localhost' WITH GRANT OPTION;
 
 FLUSH PRIVILEGES;
 EOF
 
 # Sobe o container MySQL
 docker run -d --rm \
-  --name "$mysql_container" \
-  -p "$mysql_port":3306 \
-  -e MYSQL_ROOT_PASSWORD="$mysql_root_pass" \
-  -e MYSQL_USER="$mysql_user" \
-  -e MYSQL_PASSWORD="$mysql_pass" \
-  -e MYSQL_DATABASE="$mysql_db" \
-  --network "$mysql_network" \
-  --network-alias "${mysql_container}-mysql" \
-  -v "$init_sql_path":/docker-entrypoint-initdb.d/init.sql \
-  -v "${mysql_container}_data":/var/lib/mysql \
-  mysql:"$mysql_version"
+   --name "$mysql_container" \
+   -p "$mysql_port":3306 \
+   -e MYSQL_ROOT_PASSWORD="$mysql_pass" \
+   -e MYSQL_USER="$mysql_user" \
+   -e MYSQL_PASSWORD="$mysql_pass" \
+   -e MYSQL_DATABASE="$mysql_db" \
+   --network "$mysql_network" \
+   --network-alias "${mysql_container}-mysql" \
+   -v "$init_sql_path":/docker-entrypoint-initdb.d/init.sql \
+   -v "${mysql_container}_data":/var/lib/mysql \
+   mysql:"$mysql_version"
 
 echo ''
 bash "${path_dir}/success.sh" "MySQL '$mysql_container' upado com sucesso na porta $mysql_port!"
