@@ -123,6 +123,18 @@ spinner() {
 
 #-------------------------------------------------------------------------------------------------------
 
+# Setando usuário na pasta public
+./src/Core/exec_spinner.sh \
+    "sudo chown -R www-data:www-data public > /dev/null 2>&1" \
+    "Setando usuário na pasta public... Digite a senha do sudo: "
+
+# Setando permissão na pasta public
+./src/Core/exec_spinner.sh \
+    "sudo chmod -R 755 public > /dev/null 2>&1" \
+    "Setando permissão na pasta public...: "
+
+#-------------------------------------------------------------------------------------------------------
+
 # Etapa montando container ---
 default_port_nginx=9000
 echo "";
