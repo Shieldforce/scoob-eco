@@ -3,6 +3,7 @@
 namespace ScoobEco\InitSystem\DB;
 
 use PDO;
+use ScoobEco\Core\Config;
 
 class BootMysql implements InterfaceBootDB
 {
@@ -13,11 +14,11 @@ class BootMysql implements InterfaceBootDB
     public static function getConnection(): PDO
     {
         if (self::$connection === null) {
-            $host    = $_ENV['DB_HOST'];
-            $user    = $_ENV['DB_USER'];
-            $pass    = $_ENV['DB_PASS'];
-            $db      = $_ENV['DB_NAME'];
-            $charset = $_ENV['DB_CHARSET'];
+            $host    = Config::get('database.connections.mysql.host');
+            $user    = Config::get('database.connections.mysql.user');
+            $pass    = Config::get('database.connections.mysql.pass');
+            $db      = Config::get('database.connections.mysql.db');
+            $charset = Config::get('database.connections.mysql.charset');
 
             $dsn     = "mysql:host=$host;dbname=$db;charset=$charset";
             $options = [

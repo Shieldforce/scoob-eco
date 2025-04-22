@@ -3,7 +3,8 @@
   "description": "Framework php - Eco sistema para php",
   "autoload": {
     "psr-4": {
-      "ScoobEco\\": "src/"
+      "ScoobEco\\": "src/",
+      "ScoobEco\\Controllers\\": "Controllers/"
     },
     "files": [
       "src/Helpers/global.php"
