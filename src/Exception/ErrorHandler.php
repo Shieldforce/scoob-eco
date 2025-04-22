@@ -9,7 +9,7 @@ class ErrorHandler
 {
     public static function handle(
         Throwable $e,
-        ErrorType $type = ErrorType::Internal
+        ErrorType $type = ErrorType::FATAL_ERROR
     ): void
     {
         ddError($type, $e);

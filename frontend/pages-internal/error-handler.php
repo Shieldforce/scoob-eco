@@ -23,7 +23,7 @@
         <div class="box">
             <h2 class="title-error-h2 fonte-manu">
                 <i class="fas fa-exclamation-triangle"></i>
-                <?= $type->value ?>
+                <?= $type->description() ?>
             </h2>
         </div>
         <div class="box">
@@ -42,26 +42,34 @@
             <strong class="title-cor-white-1">Message :</strong>
             <a
                     class="title-error-a"
-                    href="https://google.com/search?q=<?= $e->getMessage() ?>"
+                    href="https://google.com/search?q=<?= $e->getMessage() ?? "-" ?>"
                     target="_blank"
             >
-                <?= $e->getMessage() ?>
+                <?= $e->getMessage() ?? "-" ?>
             </a>
             <strong class="title-cor-white-1">
                 <i class="fas fa-search"></i>
                 Clique no link do erro para buscar no google.
             </strong>
         </p>
-        <p><strong class="title-cor-white-1">Arquivo :</strong> <?= $e->getFile() ?></p>
+        <p><strong class="title-cor-white-1">Arquivo :</strong> <?= $e->getFile() ?? "-" ?></p>
         <p>
             <strong class="title-cor-white-1">Linha :</strong>
             <strong class="fonte-2">
-                <?= $e->getLine() ?>
+                <?= $e->getLine() ?? "-" ?>
             </strong>
         </p>
-        <button id="btn-print" class="btn btn-danger">
-            <i class="fas fa-bug"></i> Relatar Bug
-        </button>
+        <div class="">
+            <button
+                    id="btn-print"
+                    class="btn btn-danger"
+                    data-file="<?= $e->getFile() ?? "-" ?>"
+                    data-line="<?= $e->getLine() ?? "-" ?>"
+                    data-code="<?= $e->getCode() ?? "-" ?>"
+            >
+                <i class="fas fa-bug"></i> Relatar Bug
+            </button>
+        </div>
     </div>
     <hr>
     <div class="flex-container mt-2">
@@ -77,7 +85,7 @@
         <div class="box2">
             <h2 class="title-error-h2 fonte-manu">
                 -
-                <i class="fa fa-cogs"></i>
+                <i class="fa fa-bug"></i>
             </h2>
         </div>
     </div>
@@ -86,14 +94,14 @@
         <div class="linha-error-code-2">
             <p>
                 <strong class="title-cor-white-1">Método :</strong>
-                <?= $trace["function"]; ?>
+                <?= $trace["function"] ?? "-"; ?>
             </p>
-            <p><strong class="title-cor-white-1">Arquivo :</strong> <?= $trace["file"] ?></p>
-            <p><strong class="title-cor-white-1">Classe :</strong> <?= $trace["class"] ?></p>
+            <p><strong class="title-cor-white-1">Arquivo :</strong> <?= $trace["file"] ?? "-"; ?></p>
+            <p><strong class="title-cor-white-1">Classe :</strong> <?= $trace["class"] ?? "-"; ?></p>
             <p>
                 <strong class="title-cor-white-1">Linha :</strong>
                 <strong class="fonte-2">
-                    <?= $trace["line"]; ?>
+                    <?= $trace["line"] ?? "-"; ?>
                 </strong>
             </p>
         </div>
@@ -104,6 +112,7 @@
 <!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     /*document.getElementById("btn-print").addEventListener("click", function () {
         html2canvas(document.body).then(function (canvas) {
@@ -115,6 +124,9 @@
     });*/
 
     document.getElementById("btn-print").addEventListener("click", function () {
+        const fileAttr = this.getAttribute("data-file")
+        const lineAttr = this.getAttribute("data-line")
+        const codeAttr = this.getAttribute("data-code")
         html2canvas(document.body).then(function (canvas) {
             // Converte o canvas para base64
             const imageData = canvas.toDataURL("image/png");
@@ -122,6 +134,9 @@
             // Cria um form data
             const formData = new FormData();
             formData.append("screenshot", imageData);
+            formData.append("file", fileAttr);
+            formData.append("line", lineAttr);
+            formData.append("code", codeAttr);
 
             // Envia para o backend
             fetch("backend.php", {
@@ -130,12 +145,18 @@
             })
                 .then(response => response.text())
                 .then(result => {
-                    console.log("Print enviado com sucesso:", result);
-                    //alert("Print enviado com sucesso!");
+                    Swal.fire({
+                        title: "Sucesso",
+                        text: "Print enviado com sucesso!",
+                        icon: "success"
+                    });
                 })
                 .catch(error => {
-                    console.error("Erro ao enviar o print:", error);
-                    //alert("Erro ao enviar o print.");
+                    Swal.fire({
+                        title: "Erro",
+                        text: "Erro ao enviar print!",
+                        icon: "error"
+                    });
                 });
         });
     });

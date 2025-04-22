@@ -123,15 +123,15 @@ spinner() {
 
 #-------------------------------------------------------------------------------------------------------
 
-# Setando usuário na pasta public
+# Setando usuário na pasta assets
 ./src/Core/exec_spinner.sh \
-    "sudo chown -R www-data:www-data public > /dev/null 2>&1" \
-    "Setando usuário na pasta public... Digite a senha do sudo: "
+    "sudo chown -R www-data:www-data assets > /dev/null 2>&1" \
+    "Setando usuário na pasta assets... Digite a senha do sudo: "
 
-# Setando permissão na pasta public
+# Setando permissão na pasta assets
 ./src/Core/exec_spinner.sh \
-    "sudo chmod -R 755 public > /dev/null 2>&1" \
-    "Setando permissão na pasta public...: "
+    "sudo chmod -R 755 assets > /dev/null 2>&1" \
+    "Setando permissão na pasta assets...: "
 
 #-------------------------------------------------------------------------------------------------------
 

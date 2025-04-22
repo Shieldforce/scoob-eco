@@ -6,7 +6,7 @@ use PDO;
 
 class BootMysql implements InterfaceBootDB
 {
-    private static ?PDO    $connection   = null;
+    private static ?PDO $connection = null;
 
     private function __construct() {}
 

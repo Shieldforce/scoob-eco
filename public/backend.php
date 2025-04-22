@@ -12,7 +12,12 @@ if (isset($_POST['screenshot'])) {
 
     // Salva no servidor
     $fileName = 'screenshot_' . time() . '.png';
-    file_put_contents(__DIR__ . '/' . $fileName, $data);
+    $path = str_replace('/public', '/assets/imgs/screenshots', __DIR__);
+    if (!file_exists($path)) {
+        mkdir($path, 0755, true);
+    }
+
+    file_put_contents( $path . '/' . $fileName, $data);
 
     echo "Imagem salva com sucesso como: $fileName";
 } else {
