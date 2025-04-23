@@ -40,7 +40,6 @@ class Router
             }
         }
 
-        http_response_code(404);
-        throw new Exception("Route not found!");
+        throw new Exception("Route not found!", 404);
     }
 }
