@@ -127,3 +127,9 @@ if (!function_exists('route')) {
         return $route["uri"];
     }
 }
+
+if (!function_exists('isJsonRequest')) {
+    function isJsonRequest(): bool {
+        return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
+    }
+}

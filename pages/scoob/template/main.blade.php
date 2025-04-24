@@ -1,8 +1,8 @@
 <main class="form-signin w-100 m-auto">
     <form
             method="POST"
-            action="{{ route("pages.scoob.login") }}"
-            onsubmit="submitGlobalForm(this);"
+            action="{{ route("pages.scoob.login.run") }}"
+            id="formGlobalSubmit"
     >
         <img
                 class="mb-4"
@@ -14,11 +14,23 @@
         <h1 class="h3 mb-3 fw-normal">Acessar ScoobEco</h1>
 
         <div class="form-floating">
-            <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+            <input
+                    type="email"
+                    class="form-control"
+                    id="floatingInput"
+                    placeholder="name@example.com"
+                    name="email"
+            >
             <label for="floatingInput">E-mail</label>
         </div>
         <div class="form-floating">
-            <input type="password" class="form-control" id="floatingPassword" placeholder="Senha">
+            <input
+                    type="password"
+                    class="form-control"
+                    id="floatingPassword"
+                    placeholder="Senha"
+                    name="password"
+            >
             <label for="floatingPassword">Senha</label>
         </div>
 
