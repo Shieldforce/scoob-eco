@@ -4,6 +4,7 @@
   "autoload": {
     "psr-4": {
       "ScoobEco\\": "src/",
+      "ScoobEco\\Pages\\": "pages/",
       "ScoobEco\\Controllers\\": "Controllers/"
     },
     "files": [

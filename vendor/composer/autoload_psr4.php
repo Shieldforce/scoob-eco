@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Shieldforce\\Scoob\\' => array($vendorDir . '/shieldforce/scoob/src'),
+    'ScoobEco\\Pages\\' => array($baseDir . '/pages'),
     'ScoobEco\\Controllers\\' => array($baseDir . '/Controllers'),
     'ScoobEco\\' => array($baseDir . '/src'),
 );

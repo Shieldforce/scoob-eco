@@ -3,6 +3,18 @@
 ## Requisitos obrigatórios:
 - Docker
 
+#### Atualizações de Segurança:
+- Atualização de segurança para containers em produção, Agora os containers das versões docker-php-nginx
+  nas versões de php (8.2, 8.3 e 8.4), não executam o container como root, mas como um usuário local, com privilégios limitados, 
+  que impedirá escala de privilégios para o host.
+
+---
+#### Os containers habilitados para rodar em produção (rodam como usuário limitado):
+
+- scoob --type docker-php-nginx --version 8.2 --port {port}
+- scoob --type docker-php-nginx --version 8.3 --port {port}
+- scoob --type docker-php-nginx --version 8.4 --port {port}
+
 ---
 ## Instalando Scoob globalmente:
 ```
@@ -78,7 +90,6 @@ scoob --type docker-laravel {parametros obrigatórios}
 scoob --docker-prune
 ```
 ---
-
 ### Roda um servidor mysql na rede scoob-network (se rodar: scoob --mysql-ext ele roda com os parâmetros defaults):
 ### Usuário root tem todos os privilégios! E utiliza a mesma senha --pass='password'
 #### Dados Default:
@@ -98,9 +109,23 @@ scoob --mysql-ext=true \
 ```
 ---
 
+---
+### Roda um servidor redis na rede scoob-network (se rodar: scoob --redis-ext ele roda com os parâmetros defaults):
+#### Dados Default:
+- port: 6379
+- pass: @ScoobRedis-dg333445fvcv
+- container: scoob-redis
+```
+scoob --redis-ext=true \
+    --container="scoob-redis" \
+    --port="6379" \
+    --pass="@ScoobRedis-dg333445fvcv"
+```
+---
+
 ## Exemplos de container para php/nginx e laravel:
 - --type                   (obrigatório) : Tipo do container para php sempre será (docker-php-nginx)
-- --version                (obrigatório) : Versão do PHP Versões disponíveis (7.3, 7.4, 8.1, 8.2, 8.3,84)
+- --version                (obrigatório) : Versão do PHP Versões disponíveis (7.3, 7.4, 8.1, 8.2, 8.3, 8.4)
 - --port                   (obrigatório) : Porta de Exposição do container
 - --redis-port             (opcional) : Seta porta do redis!
 - --mysql-port             (opcional) : Seta porta do mysql!
@@ -157,7 +182,9 @@ Se não passou porta, ela será no caso de
 - php8.2: 6382
 - php8.3: 6383
 - php8.4: 6384
-Se passou --redis-port será o valor passado:
+
+### Se passou --redis-port será o valor passado:
+
 ```
 docker exec -it {container-name} redis-cli -p {port}
 ```
@@ -181,7 +208,9 @@ Se não passou porta, ela será no caso de
 - php8.2: 3382
 - php8.3: 3383
 - php8.4: 3384
-  Se passou --mysql-port será o valor passado:
+  
+### Se passou --mysql-port será o valor passado:
+
 ```
 docker exec -it {container-name} mysql
 MariaDB [(none)]> create database {db_name};
@@ -210,12 +239,32 @@ DB_PASSWORD={senha_desejada}
 
 ### Rodar Migrate (Se pedir para criar banco cujo o nome está na variável DB_DATABASE, aceite):
 ```
-docker exec -it {container-name} php artisan migrate
+docker exec -it --user $(id -u):$(id -g) {container-name} php artisan migrate
 ```
-
 
 ### Rodar Horizon (Se não estiver instalado rode o primeiro comando):
 ```
-docker exec -it {container-name} composer require laravel/horizon
-docker exec -it {container-name} php artisan horizon:install
+docker exec -it --user $(id -u):$(id -g) {container-name} composer require laravel/horizon
+docker exec -it --user $(id -u):$(id -g) {container-name} php artisan horizon:install
+```
+---
+
+### Versões do PHP com suportes para drivers sqlsrv(Sql server):
+- 8.2
+- 8.3
+- 8.4
+
+### Suporte como cliente para Sql Servers:
+- SQL Server 2012 (SP4+)	✅ Suportado
+- SQL Server 2014	✅ Suportado
+- SQL Server 2016	✅ Suportado
+- SQL Server 2017	✅ Suportado
+- SQL Server 2019	✅ Suportado
+- SQL Server 2022	✅ Suportado
+- SQL Azure (Azure SQL DB)	✅ Suportado
+
+
+### Entrar no container para rodar comandos sempre use o usuário local!
+```
+docker exec -it --user $(id -u):$(id -g) {container-name} bash
 ```

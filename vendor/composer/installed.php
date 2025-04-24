@@ -3,7 +3,7 @@
         'name' => 'shieldforce/scoob-eco',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '0ea75599c0645f37cd11e9cd48226fd83dfa4b89',
+        'reference' => 'c3f2c432674b1bcb4a5778f5f2149c197cdde36d',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'shieldforce/scoob' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'df6cab3e18c9dbefe0e9919d5dc355303f037629',
+            'reference' => 'd4f9a1704e1b4f6661fd0d7caa0ce5326dbd956e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../shieldforce/scoob',
             'aliases' => array(
@@ -24,7 +24,7 @@
         'shieldforce/scoob-eco' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0ea75599c0645f37cd11e9cd48226fd83dfa4b89',
+            'reference' => 'c3f2c432674b1bcb4a5778f5f2149c197cdde36d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

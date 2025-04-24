@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99
+class ComposerStaticInit38bd52827050fd8f5854f23047bd8852
 {
     public static $files = array (
         '9b6885e668c6b7014e8ea84d17d6d944' => __DIR__ . '/../..' . '/src/Helpers/global.php',
@@ -14,6 +14,7 @@ class ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99
         'S' => 
         array (
             'Shieldforce\\Scoob\\' => 18,
+            'ScoobEco\\Pages\\' => 15,
             'ScoobEco\\Controllers\\' => 21,
             'ScoobEco\\' => 9,
         ),
@@ -23,6 +24,10 @@ class ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99
         'Shieldforce\\Scoob\\' => 
         array (
             0 => __DIR__ . '/..' . '/shieldforce/scoob/src',
+        ),
+        'ScoobEco\\Pages\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/pages',
         ),
         'ScoobEco\\Controllers\\' => 
         array (
@@ -41,9 +46,9 @@ class ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInitf3a0b21380ac6a5328cdf51f6e4d1c99::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInit38bd52827050fd8f5854f23047bd8852::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInit38bd52827050fd8f5854f23047bd8852::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInit38bd52827050fd8f5854f23047bd8852::$classMap;
 
         }, null, ClassLoader::class);
     }
