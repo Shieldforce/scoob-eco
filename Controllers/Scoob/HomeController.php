@@ -10,9 +10,11 @@ use ScoobEco\Enum\ResponseType;
 
 class HomeController extends BaseController
 {
-    public function login(Request $request)
+    public function login(Request $request, $id = null, $teste = null, $outro = null)
     {
         $title = "Login ScoobEco";
+
+        dd([$id, $teste, $outro]);
 
         return view(
             'pages.scoob.login',
