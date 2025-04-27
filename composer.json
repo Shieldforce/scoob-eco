@@ -5,7 +5,9 @@
     "psr-4": {
       "ScoobEco\\": "src/",
       "ScoobEco\\Pages\\": "pages/",
-      "ScoobEco\\Controllers\\": "Controllers/"
+      "ScoobEco\\Controllers\\": "Controllers/",
+      "ScoobEco\\Middlewares\\": "Middlewares/",
+      "ScoobEco\\Exception\\": "Exception/"
     },
     "files": [
       "src/Helpers/global.php"

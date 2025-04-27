@@ -18,31 +18,31 @@
         })
             .then(async response => {
                 const contentType = response.headers.get("content-type");
-
                 if (response.ok && contentType && contentType.includes("application/json")) {
                     const data = await response.json();
-
-                    console.log(data);
+                    let msg = data.message ?? 'Dados salvos com sucesso!';
                     Swal.close();
                     successScoob(
                         'Sucesso!',
-                        'Dados salvos com sucesso!',
+                        msg,
                     );
                 } else {
                     const errorText = await response.text();
                     Swal.close();
+                    let msg = errorText.message ?? "Erro ao salvar os dados!";
                     errorScoob(
                         'Erro@!',
-                        'Erro ao salvar os dados!',
+                        msg
                     );
                     console.error("Resposta inesperada:", errorText);
                 }
             })
             .catch(error => {
                 Swal.close();
+                var msg = error ?? "Erro ao salvar os dados!";
                 errorScoob(
                     'Erro@!',
-                    'Erro ao salvar os dados!',
+                    msg
                 );
                 console.error(error);
             });

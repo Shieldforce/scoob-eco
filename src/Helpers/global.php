@@ -28,9 +28,10 @@ if (!function_exists('dd')) {
         mixed $keys = null,
     ): void
     {
-        echo "<pre style='background: black; color: white;padding: 20px;'>";
+        echo "<pre style='background: black; color: white;padding: 20px;height: 100%'>";
         print_r($keys);
         echo "</pre>";
+        die();
     }
 }
 

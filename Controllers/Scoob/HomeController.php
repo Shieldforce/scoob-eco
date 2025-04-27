@@ -10,12 +10,9 @@ use ScoobEco\Enum\ResponseType;
 
 class HomeController extends BaseController
 {
-    public function login(Request $request, $id = null, $teste = null, $outro = null)
+    public function login(Request $request)
     {
         $title = "Login ScoobEco";
-
-        dd([$id, $teste, $outro]);
-
         return view(
             'pages.scoob.login',
             compact('title')
@@ -37,7 +34,7 @@ class HomeController extends BaseController
                 $request,
                 ResponseType::error,
                 $exception->getMessage() ?? "Erro ao efetuar login!",
-                $exception->getCode() ?? 500
+                500
             );
         }
     }

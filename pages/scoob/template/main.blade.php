@@ -3,7 +3,9 @@
             method="POST"
             action="{{ route("pages.scoob.login.run") }}"
             id="formGlobalSubmit"
+            enctype="multipart/form-data"
     >
+        <input type="hidden" name="_token" value="teste">
         <img
                 class="mb-4"
                 src="{{ asset('imgs/logo-trans-scoob.png') }}"

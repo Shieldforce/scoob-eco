@@ -20,25 +20,45 @@
     function successScoob(
         title = 'Sem título',
         html = "<span>Sem descrição</span>",
+        buttonOk = false,
     ) {
-        Swal.fire({
+        var obj = {
             title: title,
             html: html,
             theme: localStorage.getItem("theme") || "light",
-            icon: "success"
-        });
+            icon: "success",
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Confirmar!',
+        };
+
+        if (!buttonOk) {
+            obj.timer = 5000;
+            obj.timerProgressBar = true;
+        }
+
+        Swal.fire(obj);
     }
 
     function errorScoob(
         title = 'Sem título',
         html = "<span>Sem descrição</span>",
+        buttonOk = false,
     ) {
-        Swal.fire({
+        var obj = {
             title: title,
             html: html,
             theme: localStorage.getItem("theme") || "light",
             icon: "error",
-        });
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Confirmar!',
+        };
+
+        if (!buttonOk) {
+            obj.timer = 5000;
+            obj.timerProgressBar = true;
+        }
+
+        Swal.fire(obj);
     }
 
 </script>

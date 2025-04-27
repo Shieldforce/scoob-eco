@@ -3,7 +3,9 @@
 namespace ScoobEco\Core\Routing;
 
 use Exception;
+use ScoobEco\Core\Http\BaseMiddleware;
 use ScoobEco\Core\Http\Request;
+use Throwable;
 
 class Router
 {
@@ -33,65 +35,29 @@ class Router
         }
     }
 
-    /*public function dispatch()
-    {
-        $requestUri = '/' . trim($this->request->uri, '/');
-
-        foreach ($this->routes as $route => $array) {
-            $paramNames = [];
-
-            $route = '/' . trim($route, '/');
-
-            $pattern = preg_replace_callback('#\{([^}/]+)\??\}#', function ($matches) use (&$paramNames) {
-                $isOptional = str_ends_with($matches[0], '?}');
-                $paramName = rtrim($matches[1], '?');
-                $paramNames[] = $paramName;
-
-                return $isOptional ? '(?:/([^/]+))?' : '/([^/]+)';
-            }, $route);
-
-
-            $pattern = preg_replace('#//+#', '/', $pattern);
-            $pattern = "#^" . rtrim($pattern, '/') . "/?$#";
-
-            $requestUri = trim($requestUri);
-
-            if (preg_match($pattern, $requestUri, $matches)) {
-                array_shift($matches);
-
-                $params = [];
-                foreach ($paramNames as $i => $name) {
-                    $params[$name] = $matches[$i] ?? null;
-                }
-
-                [
-                    $controller,
-                    $method
-                ] = explode('@', $array["action"]);
-                return (new $controller)->$method($this->request, ...array_values($params));
-            }
-        }
-
-        throw new Exception("Route not found!", 404);
-    }*/
-
-
     public function dispatch()
     {
         $requestUri = '/' . trim($this->request->uri, '/');
         foreach ($this->routes as $route => $array) {
+            $route = [
+                "path" => $route,
+            ];
+
+            $route = array_merge($route, $array);
+
+            if (isset($route["middlewares"]) && count($route["middlewares"]) > 0) {
+                $baseMiddleware = new BaseMiddleware($this->request);
+                $baseMiddleware->executeRouteMiddlewares($route["middlewares"]);
+            }
+
             $verify = $this->verifySegments($requestUri, $route);
-            if($verify["ok"]) {
-                [
-                    $controller,
-                    $method
-                ] = explode('@', $array["action"]);
-                return (new $controller)->$method($this->request, ...array_values($verify["params"] ?? []));
+            if ($verify["ok"]) {
+                $this->request->currentRoute = $route;
+                return $this->verifyControllerExit($array, $verify);
             }
         }
         throw new Exception("Route not found!", 404);
     }
-
 
     public static function getRoutes()
     {
@@ -100,47 +66,74 @@ class Router
 
     public function verifySegments($requestUri, $route)
     {
-        $uriSegments   = array_values(array_filter(explode('/', trim($requestUri, '/'))));
-        $routeSegments = array_values(array_filter(explode('/', trim($route, '/'))));
-
-        // Se a URI for maior que a rota, só continua se os extras forem parâmetros opcionais
-        if (count($uriSegments) > count($routeSegments)) {
+        if (strtoupper($this->request->method) != strtoupper($route["method"])) {
             return ["ok" => false];
         }
 
-        $params = [];
+        $newRoutePath        = $route["path"];
+        $params["variables"] = [];
+        $params["match"]     = [];
 
-        foreach ($routeSegments as $index => $segment) {
-            $uriValue = $uriSegments[$index] ?? null;
-
-            $isOptionalParam = preg_match('/^{([^\/?]+)\?}$/', $segment, $optionalMatch);
-            $isRequiredParam = preg_match('/^{([^\/?]+)}$/', $segment, $requiredMatch);
-
-            if (!$isRequiredParam && !$isOptionalParam) {
-                // Segmento fixo
-                if ($segment !== $uriValue) {
-                    return ["ok" => false];
-                }
-            }
-
-            if ($isRequiredParam) {
-                $paramName = $requiredMatch[1];
-                if ($uriValue === null) {
-                    return ["ok" => false];
-                }
-                $params[$paramName] = $uriValue;
-            }
-
-            if ($isOptionalParam) {
-                $paramName = $optionalMatch[1];
-                if ($uriValue !== null) {
-                    $params[$paramName] = $uriValue;
-                }
-            }
+        $patterParams = "/\/?{(.*?)\??}/";
+        if (preg_match_all($patterParams, $route["path"], $matches)) {
+            $newRoutePath        = preg_replace($patterParams, '(?:/(.*))?', $route["path"]);
+            $params["match"]     = $matches[1];
+            $params["variables"] = $matches[0];
         }
 
-        return ["ok" => true, "params" => $params];
+        $patternRoute = "/^" . str_replace("/", "\/", $newRoutePath) . "$/";
+
+        if (preg_match($patternRoute, $requestUri, $matches)) {
+
+            unset($matches[0]);
+
+            $keys          = $params["match"];
+            $matchesParams = explode("/", $matches[1]);
+            $params        = $this->matchArrayCombine($matchesParams, $keys);
+
+            return [
+                "ok"     => true,
+                "params" => $params
+            ];
+        }
+
+        return ["ok" => false];
     }
 
+    public function verifyControllerExit(array $array, array $verify)
+    {
+        [
+            $controller,
+            $method
+        ] = explode('@', $array["action"]);
+
+
+        if (!class_exists($controller)) {
+            throw new Exception("Controller not found: {$controller}", 404);
+        }
+
+        if (!method_exists($controller, $method)) {
+            throw new Exception("Method not found: {$controller} -> {$method}", 404);
+        }
+
+        return (new $controller)
+            ->$method(
+                $this->request,
+                ...array_values($verify["params"] ?? []
+                )
+            );
+    }
+
+    public function matchArrayCombine($matchesParams, $keys)
+    {
+        try {
+            $match = (count($keys) > 0 && count($matchesParams) > 0) ?
+                array_combine($keys, $matchesParams) :
+                [];
+            return $match;
+        } catch (Throwable $exception) {
+            throw new Exception("Route not found!", 404);
+        }
+    }
 
 }

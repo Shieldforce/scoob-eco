@@ -2,6 +2,7 @@
 
 namespace ScoobEco\Core\Http;
 
+use Exception;
 use ScoobEco\Enum\ResponseType;
 
 class Response
@@ -24,6 +25,13 @@ class Response
             header("Content-Type: application/json; charset=utf-8");
             echo json_encode($response, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);
             exit;
+        }
+
+        if ($response["error"]) {
+            throw new Exception(
+                $message,
+                $status
+            );
         }
 
         return $response;
