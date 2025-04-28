@@ -2,7 +2,7 @@
 
 namespace ScoobEco\Core\Http;
 
-use ScoobEco\Middlewares\OrderExecuteMiddlewares;
+use ScoobEco\Eco\Middlewares\OrderExecuteMiddlewares;
 
 class BaseMiddleware
 {
@@ -19,14 +19,16 @@ class BaseMiddleware
 
     public function loadBootMiddlewares(): void
     {
-        $middlewaresFiles = glob(__DIR__ . '/../../../Middlewares/Boot/*.php');
+        $middlewaresFiles = glob(__DIR__ . '/../../../Eco/Middlewares/Boot/*.php');
         foreach ($middlewaresFiles as $file) {
             $xPath = explode("/", $file);
 
+            $ecoName        = $xPath[count($xPath) - 4];
             $middlewareName = $xPath[count($xPath) - 3];
             $bootName       = $xPath[count($xPath) - 2];
             $fileName       = $xPath[count($xPath) - 1];
             $join           = implode("\\", [
+                $ecoName,
                 $middlewareName,
                 $bootName,
                 $fileName,

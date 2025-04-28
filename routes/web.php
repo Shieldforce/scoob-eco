@@ -2,7 +2,7 @@
 
 return [
     "/" => [
-        "action"      => "ScoobEco\Controllers\HomeController@index",
+        "action"      => "ScoobEco\Eco\Controllers\HomeController@index",
         "name"        => "welcome",
         "method"      => "get",
         "middlewares" => []

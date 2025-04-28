@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoobEco\Middlewares\OrderList;
+namespace ScoobEco\Eco\Middlewares\OrderList;
 
 use ScoobEco\Core\Http\MiddlewareInterface;
 use ScoobEco\Core\Http\Request;

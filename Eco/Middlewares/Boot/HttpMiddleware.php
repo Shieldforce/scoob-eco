@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoobEco\Middlewares\Boot;
+namespace ScoobEco\Eco\Middlewares\Boot;
 
 use ScoobEco\Core\Config;
 use ScoobEco\Core\Http\MiddlewareInterface;

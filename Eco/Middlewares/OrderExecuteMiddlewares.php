@@ -1,9 +1,9 @@
 <?php
 
-namespace ScoobEco\Middlewares;
+namespace ScoobEco\Eco\Middlewares;
 
-use ScoobEco\Middlewares\OrderList\FirstMiddleware;
-use ScoobEco\Middlewares\OrderList\SecondMiddleware;
+use ScoobEco\Eco\Middlewares\OrderList\FirstMiddleware;
+use ScoobEco\Eco\Middlewares\OrderList\SecondMiddleware;
 
 class OrderExecuteMiddlewares
 {

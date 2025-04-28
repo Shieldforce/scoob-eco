@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoobEco\Controllers;
+namespace ScoobEco\Eco\Controllers;
 
 use ScoobEco\Core\Http\Request;
 

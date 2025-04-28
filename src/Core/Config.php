@@ -6,7 +6,7 @@ class Config
 {
     protected static array $config = [];
 
-    public static function load(string $path = __DIR__ . '/../../config')
+    public static function load(string $path = __DIR__ . '/../../Eco/config')
     {
         foreach (glob($path . '/*.php') as $file) {
             $name                  = basename($file, '.php');

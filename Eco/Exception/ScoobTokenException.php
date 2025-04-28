@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoobEco\Exception;
+namespace ScoobEco\Eco\Exception;
 
 use Exception;
 

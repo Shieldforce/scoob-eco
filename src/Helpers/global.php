@@ -55,12 +55,12 @@ if (!function_exists('ddError')) {
         $ambient = $_ENV['DB_AMBIENT'];
 
         if (isset($ambient) && $ambient == "dev") {
-            require __DIR__ . '/../../frontend/pages-internal/error-handler.php';
+            require __DIR__ . '/../../Eco/pages-error/pages-internal/error-handler.php';
             exit;
         }
 
         if (isset($ambient) && $ambient == "prod") {
-            require __DIR__ . '/../../frontend/pages-internal/error-handler.php';
+            require __DIR__ . '/../../Eco/pages-error/pages-internal/error-handler.php';
             exit;
         }
 

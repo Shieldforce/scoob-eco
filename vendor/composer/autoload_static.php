@@ -14,9 +14,7 @@ class ComposerStaticInit38bd52827050fd8f5854f23047bd8852
         'S' => 
         array (
             'Shieldforce\\Scoob\\' => 18,
-            'ScoobEco\\Pages\\' => 15,
-            'ScoobEco\\Middlewares\\' => 21,
-            'ScoobEco\\Controllers\\' => 21,
+            'ScoobEco\\Eco\\' => 13,
             'ScoobEco\\' => 9,
         ),
     );
@@ -26,17 +24,9 @@ class ComposerStaticInit38bd52827050fd8f5854f23047bd8852
         array (
             0 => __DIR__ . '/..' . '/shieldforce/scoob/src',
         ),
-        'ScoobEco\\Pages\\' => 
+        'ScoobEco\\Eco\\' => 
         array (
-            0 => __DIR__ . '/../..' . '/pages',
-        ),
-        'ScoobEco\\Middlewares\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Middlewares',
-        ),
-        'ScoobEco\\Controllers\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/Controllers',
+            0 => __DIR__ . '/../..' . '/Eco',
         ),
         'ScoobEco\\' => 
         array (

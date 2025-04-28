@@ -1,6 +1,6 @@
 <?php
 
-namespace ScoobEco\Controllers\Scoob;
+namespace ScoobEco\Eco\Controllers\Scoob;
 
 use Exception;
 use ScoobEco\Core\Controllers\BaseController;
