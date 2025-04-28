@@ -2,6 +2,7 @@
 
 use JetBrains\PhpStorm\NoReturn;
 use ScoobEco\Core\Controllers\BaseController;
+use ScoobEco\DIContainer\Resolver;
 use ScoobEco\Enum\ErrorType;
 
 if (!function_exists('env')) {
@@ -131,7 +132,22 @@ if (!function_exists('route')) {
 }
 
 if (!function_exists('isJsonRequest')) {
-    function isJsonRequest(): bool {
+    function isJsonRequest(): bool
+    {
         return isset($_SERVER['HTTP_X_REQUESTED_WITH']) && $_SERVER['HTTP_X_REQUESTED_WITH'] === 'XMLHttpRequest';
     }
 }
+
+if (!function_exists('resolveDI')) {
+    /**
+     * @template T
+     * @param class-string<T> $class
+     * @return Resolver<T>
+     */
+    function resolveDI(string $class): Resolver
+    {
+        return new Resolver($class);
+    }
+}
+
+

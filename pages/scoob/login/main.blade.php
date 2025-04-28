@@ -7,7 +7,7 @@
     >
         <input type="hidden" name="_token" value="teste">
         <img
-                class="mb-4"
+                class="mb-1"
                 src="{{ asset('imgs/logo-trans-scoob.png') }}"
                 alt="Logo Scoob"
                 width="200"

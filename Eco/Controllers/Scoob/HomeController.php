@@ -10,6 +10,34 @@ use ScoobEco\Enum\ResponseType;
 
 class HomeController extends BaseController
 {
+    public function setup(Request $request)
+    {
+        $title = "Instalação ScoobEco";
+        return view(
+            'pages.scoob.setup',
+            compact('title')
+        );
+    }
+
+    public function setupRun(Request $request)
+    {
+        try {
+            return Response::return(
+                $this->request,
+                ResponseType::success,
+                "Instalação efetuada com sucesso!",
+                200
+            );
+        } catch (Exception $exception) {
+            return Response::return(
+                $this->request,
+                ResponseType::error,
+                $exception->getMessage() ?? "Erro ao efetuar instalação!",
+                500
+            );
+        }
+    }
+
     public function login(Request $request)
     {
         $title = "Login ScoobEco";
@@ -23,14 +51,14 @@ class HomeController extends BaseController
     {
         try {
             return Response::return(
-                $request,
+                $this->request,
                 ResponseType::success,
                 "Login efetuado com sucesso!",
                 200
             );
         } catch (Exception $exception) {
             return Response::return(
-                $request,
+                $this->request,
                 ResponseType::error,
                 $exception->getMessage() ?? "Erro ao efetuar login!",
                 500
