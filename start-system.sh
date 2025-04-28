@@ -143,11 +143,13 @@ default_container_name=scoob-mysql
 echo "-";
 echo "-";
 echo "-";
-bash ./vendor/shieldforce/scoob/progs/question.sh "
- Você deseja instalar mysql?"
-read -p " S/N: (Por padrão é N): " install_mysql
+bash ./vendor/shieldforce/scoob/progs/question.sh "Instalação do Mysql"
 
-if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "S" ]]; then
+#bash ./vendor/shieldforce/scoob/progs/question.sh "
+# Você deseja instalar mysql?"
+#read -p " S/N: (Por padrão é N): " install_mysql
+
+#if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "S" ]]; then
 
     read -p " Porta do mysql (Por padrão é ${default_port_mysql}): " port_mysql
     echo " -"
@@ -174,7 +176,7 @@ if [[ "$install_mysql" = "s" ]] || [[ "$install_mysql" = "S" ]]; then
         --pass="${password}" \
         --db="${db_name}" \
         --container="${container_name}"
-fi
+#fi
 
 # Etapa montando redis ---
 default_redis_container=scoob-redis
@@ -183,11 +185,13 @@ default_redis_pass=@ScoobRedis-dg333445fvcv
 echo "-";
 echo "-";
 echo "-";
-bash ./vendor/shieldforce/scoob/progs/question.sh "
- Você deseja instalar redis?"
-read -p " S/N: (Por padrão é N): " install_redis
+bash ./vendor/shieldforce/scoob/progs/question.sh "Instalação do Redis"
 
-if [[ "$install_redis" = "s" ]] || [[ "$install_redis" = "S" ]]; then
+#bash ./vendor/shieldforce/scoob/progs/question.sh "
+# Você deseja instalar redis?"
+#read -p " S/N: (Por padrão é N): " install_redis
+
+#if [[ "$install_redis" = "s" ]] || [[ "$install_redis" = "S" ]]; then
 
     read -p " Porta do redis (Por padrão é ${default_redis_port}): " port_redis
     echo " -"
@@ -206,4 +210,4 @@ if [[ "$install_redis" = "s" ]] || [[ "$install_redis" = "S" ]]; then
         --container="${container_redis}" \
         --port="$port_redis" \
         --pass="$password_redis"
-fi
+#fi
