@@ -28,6 +28,7 @@ if (!function_exists('dd')) {
         mixed $keys = null,
     ): void
     {
+        http_response_code(500);
         echo "<pre style='background: black; color: white;padding: 20px;height: 100%'>";
         print_r($keys);
         echo "</pre>";
@@ -52,7 +53,7 @@ if (!function_exists('ddError')) {
         Throwable $e
     ): void
     {
-        $ambient = $_ENV['DB_AMBIENT'];
+        $ambient = $_ENV['SCOOB_AMBIENT'];
 
         if (isset($ambient) && $ambient == "dev") {
             require __DIR__ . '/../../Eco/pages-error/pages-internal/error-handler.php';

@@ -3,7 +3,6 @@
 return [
     "connections" => [
         "mysql" => [
-            'ambient'    => env('DB_AMBIENT', 'dev'),
             'driver'     => env('DB_DRIVER', 'mysql'),
             'connection' => env('DB_CONNECTION', 'mysql'),
             "host"       => env('DB_HOST', 'scoob-mysql'),
