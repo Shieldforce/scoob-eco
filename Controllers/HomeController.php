@@ -8,6 +8,10 @@ class HomeController
 {
     public function index(Request $request)
     {
-        dd($request);
+        $title = "Home";
+        return view(
+            'pages.home.index',
+            compact('title')
+        );
     }
 }

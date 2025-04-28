@@ -17,7 +17,6 @@ class HomeController extends BaseController
             'pages.scoob.login',
             compact('title')
         );
-
     }
 
     public function loginRun(Request $request)
