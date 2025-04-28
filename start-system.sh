@@ -112,17 +112,6 @@ spinner() {
 
 #-------------------------------------------------------------------------------------------------------
 
-# Composer require vlucas/phpdotenv
-# ./src/Core/exec_spinner.sh \
-#     "docker run --rm \
-#          -u "$(id -u):$(id -g)" \
-#          -v "$(pwd):/var/www/html" \
-#          -w /var/www/html composer/composer \
-#          composer require vlucas/phpdotenv > /dev/null 2>&1" \
-#     "Inserindo o pacote do vlucas/phpdotenv..."
-
-#-------------------------------------------------------------------------------------------------------
-
 # Setando usuário na pasta assets
 ./src/Core/exec_spinner.sh \
     "sudo chown -R www-data:www-data assets > /dev/null 2>&1" \
