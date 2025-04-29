@@ -12,12 +12,12 @@ class HomeController extends BaseController
     public function index(Request $request)
     {
         $title = "Home";
-
-        $user = null;
+        $user  = null;
 
         try {
             $user = DB::prepare()->table("scoob_users")->find(1);
-        } catch (Exception $e) {}
+        } catch (Exception $e) {
+        }
 
         return view(
             'pages.home.index',
