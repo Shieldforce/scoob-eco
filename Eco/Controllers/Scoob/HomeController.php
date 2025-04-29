@@ -61,15 +61,13 @@ class HomeController extends BaseController
     public function loginRun(Request $request)
     {
         try {
-            $session = new SessionManager();
-            $user = DB::prepare()->table("scoob_users")->find(1);
-            $session->createSession($user, "user_session");
-
+            //$session = new SessionManager();
+            //$user = DB::prepare()->table("scoob_users")->find(1);
+            //$session->createSession($user, "user_session");
             //$sessions = $session->clearAllSessions();
             //$sessions = $session->listSessions();
-            $sessions = $session->getSession("user_session");
-
-            dd($sessions);
+            //$sessions = $session->getSession("user_session");
+            //dd($sessions);
 
             return Response::return(
                 $request,
