@@ -18,6 +18,7 @@
   ],
   "require": {
     "shieldforce/scoob": "dev-main",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-openssl": "*"
   }
 }

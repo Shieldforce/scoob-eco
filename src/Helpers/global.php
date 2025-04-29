@@ -124,10 +124,18 @@ if (!function_exists('view')) {
 }
 
 if (!function_exists('route')) {
-    function route(string $routeName): string
+    function route(string $routeName, ?array $params = []): string
     {
         $route = \ScoobEco\Core\Support\RouteConverter::run($routeName);
-        return $route["uri"];
+        $uri = $route["uri"];
+
+        if (count($params) > 0) {
+            foreach ($params as $key => $value) {
+                $uri = preg_replace("/\{.*?\}/", $value, $uri, 1);
+            }
+        }
+
+        return $uri;
     }
 }
 

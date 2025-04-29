@@ -15,6 +15,8 @@ class BootSqlite implements InterfaceBootDB
         return self::$connection;
     }
 
+    public static function disconnect(): void {}
+
     public function __clone() {}
 
     public function __wakeup() {}

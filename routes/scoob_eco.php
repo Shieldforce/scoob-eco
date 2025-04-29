@@ -8,7 +8,7 @@ return [
         "method"      => "get",
         "middlewares" => []
     ],
-    "/scoob-eco/admin/setup/run" => [
+    "/scoob-eco/admin/setup/run/{type?}" => [
         "action"      => "ScoobEco\Eco\Controllers\Scoob\HomeController@setupRun",
         "name"        => "pages.scoob.setup.run",
         "method"      => "post",

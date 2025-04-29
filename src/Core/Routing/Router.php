@@ -116,7 +116,8 @@ class Router
             throw new Exception("Method not found: {$controller} -> {$method}", 404);
         }
 
-        return (resolveDI($controller))
+        // return (new $controller)
+        return resolveDI($controller)
             ->$method(
                 $this->request,
                 ...array_values($verify["params"] ?? []

@@ -6,6 +6,8 @@ use Exception;
 use ScoobEco\Core\Controllers\BaseController;
 use ScoobEco\Core\Http\Request;
 use ScoobEco\Core\Http\Response;
+use ScoobEco\Eco\Enum\SetupScoobType;
+use ScoobEco\Eco\Services\Scoob\StepInstallationScoobService;
 use ScoobEco\Enum\ResponseType;
 
 class HomeController extends BaseController
@@ -19,20 +21,27 @@ class HomeController extends BaseController
         );
     }
 
-    public function setupRun(Request $request)
+    public function setupRun(
+        Request $request,
+        int     $typeStep
+    )
     {
         try {
+            $typeStepClass = SetupScoobType::tryFrom($typeStep);
+            $siss = new StepInstallationScoobService($request, $typeStepClass);
+            $typeStep = $siss->run();
+
             return Response::return(
-                $this->request,
+                $request,
                 ResponseType::success,
-                "Instalação efetuada com sucesso!",
+                $typeStep->message(),
                 200
             );
         } catch (Exception $exception) {
             return Response::return(
-                $this->request,
+                $request,
                 ResponseType::error,
-                $exception->getMessage() ?? "Erro ao efetuar instalação!",
+                $exception->getMessage() ?? "Erro ao criar tabelas!",
                 500
             );
         }
@@ -51,14 +60,14 @@ class HomeController extends BaseController
     {
         try {
             return Response::return(
-                $this->request,
+                $request,
                 ResponseType::success,
                 "Login efetuado com sucesso!",
                 200
             );
         } catch (Exception $exception) {
             return Response::return(
-                $this->request,
+                $request,
                 ResponseType::error,
                 $exception->getMessage() ?? "Erro ao efetuar login!",
                 500

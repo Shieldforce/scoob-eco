@@ -11,6 +11,10 @@ class BootMysql implements InterfaceBootDB
 
     private function __construct() {}
 
+    public function __clone() {}
+
+    public function __wakeup() {}
+
     public static function getConnection(): PDO
     {
         if (self::$connection === null) {
@@ -33,7 +37,8 @@ class BootMysql implements InterfaceBootDB
         return self::$connection;
     }
 
-    public function __clone() {}
-
-    public function __wakeup() {}
+    public static function disconnect(): void
+    {
+        self::$connection = null;
+    }
 }

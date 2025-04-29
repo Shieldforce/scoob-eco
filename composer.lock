@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "38bd52827050fd8f5854f23047bd8852",
+    "content-hash": "d1b666946718e8fe5f0d13c1518f7650",
     "packages": [
         {
             "name": "shieldforce/scoob",
@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Shieldforce/scoob.git",
-                "reference": "d4f9a1704e1b4f6661fd0d7caa0ce5326dbd956e"
+                "reference": "240b9a9111c7d054a5793fc3eb911ec768e775c3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/d4f9a1704e1b4f6661fd0d7caa0ce5326dbd956e",
-                "reference": "d4f9a1704e1b4f6661fd0d7caa0ce5326dbd956e",
+                "url": "https://api.github.com/repos/Shieldforce/scoob/zipball/240b9a9111c7d054a5793fc3eb911ec768e775c3",
+                "reference": "240b9a9111c7d054a5793fc3eb911ec768e775c3",
                 "shasum": ""
             },
             "require": {
@@ -43,9 +43,9 @@
             "description": "Pacote para gerar containers rápidos",
             "support": {
                 "issues": "https://github.com/Shieldforce/scoob/issues",
-                "source": "https://github.com/Shieldforce/scoob/tree/main"
+                "source": "https://github.com/Shieldforce/scoob/tree/v4.4.0"
             },
-            "time": "2025-04-23T22:46:23+00:00"
+            "time": "2025-04-29T05:00:47+00:00"
         }
     ],
     "packages-dev": [],
@@ -57,7 +57,8 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "ext-openssl": "*"
     },
     "platform-dev": {},
     "plugin-api-version": "2.6.0"

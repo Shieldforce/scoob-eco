@@ -13,12 +13,21 @@
     <h1>Comece o desenvolvimento!</h1>
     <hr>
     <div class="div-link">
-        <a
-            class="link"
-            href="{{ route("pages.scoob.login") }}"
-        >
-            Logar no Scoob-Eco
-        </a>
+        <?php if (isset($user->id)): ?>
+            <a
+                class="link"
+                href="{{ route("pages.scoob.login") }}"
+            >
+                Logar no Scoob-Eco
+            </a>
+        <?php else: ?>
+            <a
+                class="link"
+                href="{{ route("pages.scoob.setup") }}"
+            >
+                Instalar o Scoob-Eco
+            </a>
+        <?php endif; ?>
     </div>
 </div>
 </body>
