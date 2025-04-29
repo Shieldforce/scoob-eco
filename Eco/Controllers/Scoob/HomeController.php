@@ -4,10 +4,12 @@ namespace ScoobEco\Eco\Controllers\Scoob;
 
 use Exception;
 use ScoobEco\Core\Controllers\BaseController;
+use ScoobEco\Core\Database\DB;
 use ScoobEco\Core\Http\Request;
 use ScoobEco\Core\Http\Response;
 use ScoobEco\Eco\Enum\SetupScoobType;
 use ScoobEco\Eco\Services\Scoob\StepInstallationScoobService;
+use ScoobEco\Eco\Services\Session\SessionManager;
 use ScoobEco\Enum\ResponseType;
 
 class HomeController extends BaseController
@@ -59,6 +61,16 @@ class HomeController extends BaseController
     public function loginRun(Request $request)
     {
         try {
+            $session = new SessionManager();
+            $user = DB::prepare()->table("scoob_users")->find(1);
+            $session->createSession($user, "user_session");
+
+            //$sessions = $session->clearAllSessions();
+            //$sessions = $session->listSessions();
+            $sessions = $session->getSession("user_session");
+
+            dd($sessions);
+
             return Response::return(
                 $request,
                 ResponseType::success,

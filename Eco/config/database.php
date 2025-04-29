@@ -11,6 +11,11 @@ return [
             "pass"       => env('DB_PASS', 'scoob_pass'),
             "db"         => env('DB_NAME', 'scoob_db'),
             "charset"    => env('DB_CHARSET', 'utf8mb4'),
+        ],
+        "redis" => [
+            "host"       => env('REDIS_HOST', '127.0.0.1'),
+            "port"       => env('REDIS_PORT', '6379'),
+            "pass"       => env('REDIS_PASS', null),
         ]
     ],
 ];

@@ -30,7 +30,7 @@ if (!function_exists('dd')) {
     ): void
     {
         http_response_code(500);
-        echo "<pre style='background: black; color: white;padding: 20px;height: 100%'>";
+        echo "<pre style='background: black; color: white;padding: 20px;height: auto'>";
         print_r($keys);
         echo "</pre>";
         die();
